@@ -1,0 +1,34 @@
+.reveal {
+  font-size: 20px;
+  font-family: "Cambria", "Microsoft JhengHei";
+}
+.reveal li {
+  line-height: 1.5 !important;   
+  margin-bottom: 0.5em !important; 
+} 
+
+.reveal li li {
+  line-height: 1.0 !important;
+  margin-bottom: 0.2em !important;
+  font-size: 18px;
+}
+
+.reveal pre code {
+  font-size: 2em !important;
+}
+
+.reveal .slides {  
+  text-align: left; /*靠左*/
+}
+
+.reveal .slides section {  /*調整整體的左右邊距：*/
+  padding-left:10px  !important;
+  padding-right:10px !important;   /*上  右  下 左*/
+} 
+
+/* 
+pandoc mdfiles/1_intro.md -t revealjs -o lecture/1_intro.html `
+  --embed-resources --standalone --slide-level=2 `
+  -V revealjs-url=./reveal.js `
+  --css=custom.css
+*/
