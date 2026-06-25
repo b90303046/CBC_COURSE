@@ -1,6 +1,6 @@
 .reveal {
   font-size: 20px;
-  font-family: "Cambria", "Microsoft JhengHei";
+  font-family: "Cambria", "Microsoft JhengHei"!important;
 }
 .reveal li {
   line-height: 1.5 !important;   
@@ -30,5 +30,7 @@
 pandoc mdfiles/1_intro.md -t revealjs -o lecture/1_intro.html `
   --embed-resources --standalone --slide-level=2 `
   -V revealjs-url=./reveal.js `
+  -V minScale=0.2 `
+  -V maxScale=3.0 `
   --css=custom.css
 */

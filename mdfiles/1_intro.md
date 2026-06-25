@@ -76,16 +76,44 @@ transition: slide     # 切換動畫：slide / fade / convex / none
 - 處理大量資料時（數十萬筆以上）Python 速度遠快於 VBA
 
 
-## 實際案例：實價登錄
+## 實際案例：實價登錄資料的清理與統計
+
+<div style="display: flex; gap: 2rem;">
+
+<div style="flex: 1;">
+- 自<a href='https://plvr.land.moi.gov.tw/DownloadOpenData'>內政部實價登錄網頁</a>定期下載資料
+  - 每一次下載的原始資料檔共有236個檔案，包含各縣市成屋預售屋、土地、車位、建物資料
 
 
 
+</div>
 
+<div style="flex: 1.5; display: flex; align-items: center;">
+| 代碼 | 地區 |
+|------|------|
+| `_a` | **成屋交易(合計)** |
+| `_a_land` | 成屋交易(土地) |
+| `_a_build` | 成屋交易(建物) |
+| `_a_park` | 成屋交易(停車場) |
+| `_b` | **預售屋交易(合計)** |
+| `_b_land` | 預售屋交易(土地) |
+| `_b_park` | 預售屋交易(停車場) |
+| `_c` | **租賃交易(合計)** |
+| `_c_land` | 租賃交易(土地) |
+| `_c_build` | 租賃交易(建物) |
+| `_c_park` | 租賃交易(停車場) |
+
+</div>
+</div>
+## 資料夾內容
+
+<img src="mdfiles/fig1_1.png" style="width: 400%; height: auto;">
+
+
+## 透過 Python，我們能夠：
 
 > 每期公布的壓縮檔內含數十個以縣市代碼與交易類別命名的 CSV 檔案
 > （如 `a_a.csv`、`f_b.csv`）
-
-透過 Python，我們能夠：
 
 1. **自動辨識**所有符合規則的檔案（`pathlib.Path`, 正則表達式）
 2. **批次讀取與彙整**全國各縣市資料（`pandas`）
