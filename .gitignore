@@ -3,3 +3,5 @@ lecture/
 *.gitignore
 *.svg
 *.vscode
+*.png
+tmp.md

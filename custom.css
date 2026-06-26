@@ -1,36 +1,60 @@
 .reveal {
-  font-size: 20px;
+  font-size: 1.3em;
   font-family: "Cambria", "Microsoft JhengHei"!important;
 }
+
+.reveal ul, .reveal ol {
+  padding-left: 1.5em !important;  /* 控制 bullet 到文字的距離 */
+}
+
 .reveal li {
   line-height: 1.5 !important;   
   margin-bottom: 0.5em !important; 
+ 
 } 
 
 .reveal li li {
   line-height: 1.0 !important;
   margin-bottom: 0.2em !important;
   font-size: 18px;
+ 
 }
 
+/*程式碼設定*/
 .reveal pre code {
-  font-size: 2em !important;
+  font-size: 1.5em !important;
 }
+
+.reveal :not(pre) > code {
+  font-size: 1.2em !important;
+}
+
+
+.reveal img {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+
 
 .reveal .slides {  
-  text-align: left; /*靠左*/
+  text-align: left; /*置中*/
 }
 
 .reveal .slides section {  /*調整整體的左右邊距：*/
-  padding-left:10px  !important;
+  padding-left:40px  !important;
   padding-right:10px !important;   /*上  右  下 左*/
 } 
 
+
+.reveal-viewport {
+  transform: none !important;
+}
+
 /* 
-pandoc mdfiles/1_intro.md -t revealjs -o lecture/1_intro.html `
+pandoc mdfiles/2_basic.md -t revealjs -o lecture/2_basic.html `
   --embed-resources --standalone --slide-level=2 `
   -V revealjs-url=./reveal.js `
-  -V minScale=0.2 `
-  -V maxScale=3.0 `
   --css=custom.css
 */

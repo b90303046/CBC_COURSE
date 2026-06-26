@@ -2,8 +2,8 @@
 # =========================================
 # YAML Front Matter
 # ===========================================
-title: 運用Python進行資料清理之實務操作： 
-subtitle: "內政部不動產交易實價登錄資料之建構、清理與分析<br>課程簡介與動機"
+title: 運用Python進行資料清理之實務操作：
+subtitle: 內政部不動產交易實價登錄資料之建構、清理與分析
 author: 俞欣榮
 date: 2024年8月
 institute: 中央銀行經濟研究處
@@ -12,7 +12,7 @@ slideNumber: true     # 顯示投影片頁碼
 transition: slide     # 切換動畫：slide / fade / convex / none
 ---
  
-## 本節課程大綱
+## 本節課程大綱(課程簡介)
 
 - 央行為何要關注不動產市場
 - Python 在資料處理上的應用
@@ -26,33 +26,33 @@ transition: slide     # 切換動畫：slide / fade / convex / none
 
 ::: {style="display: flex; gap: 2rem;"}
 
-::: {style="flex: 1;"}
+::: {style="flex: 1.2;"}
 - 中央銀行法第2條：本行經營之目標
   1. 促進金融穩定
   2. 健全銀行業務
   3. 維護對內及對外幣值之穩定
   4. 於上列目標範圍內，協助經濟之發展
 - 中央銀行法第39條：**本行為配合金融政策之訂定及其業務之執行，應經常蒐集資料，編製金融統計，辦理金融及經濟研究工作**
-- 根據113年國富統計，2024年底國富毛額為330.11 兆元兆元，其中不動產相關近60%
-- 另根據本行統計，2025年不動產放款占總放款達 **35%** 以上
+- 2024年底國富毛額為330.11 兆元，不動產相關近60%
+- 2025年不動產放款占總放款達 **35%** 以上
 - 本行肩負總體與金融穩定政策目標  
   → 完善不動產統計是研擬政策與措施的基石
 :::
 
-::: {style="flex: 1; display: flex; align-items: center;"}
+::: {style="flex: 0.8; display: flex; align-items: right;"}
 <img src="mdfiles/fig1.svg" style="width: 120%;">
 :::
 
 :::
 
-## 本科主要不動產相關統計業務資料來源
+## 本科定期蒐集不動產相關統計業務資料來源(包含但不限於)
 
 - 不動產市場動向資料(交易狀態、供給狀態、房價變動、房市展望)
   1. 建物買賣移轉棟數 (成屋交易、第一手交易案件)
   2. **實價登錄統計(住宅交易、預售屋交易/解約、高價住宅)**
   3. 建照執照、建物開工、使用執照統計
   4. 信義房價指數、政大永慶房價指數、內政部住宅價格指數、國泰房價指數、清華安富房價指數
-  5. 國泰國民經濟信心調查、永慶房產趨勢前瞻報告、台經院營業氣候測驗點(營建)、中經院營造暨不動產展望...
+  5. 國泰國民經濟信心調查、永慶房產趨勢前瞻報告、台經院營業氣候測驗點、中經院營造不動產展望...
 
 - 不動產貸款情勢 (選擇性信用管制平台)
   1. 經研處金統科資料
@@ -69,11 +69,12 @@ transition: slide     # 切換動畫：slide / fade / convex / none
 
 ## 使用Python而不使用VBA的原因
 
-- 大量結構化資料（CSV、Excel）需要定期整理與彙整
+- 大量結構化資料(CSV、Excel)需要定期整理與彙整
 - 資料清理耗費大量人工，且容易出錯
-- Python 語法簡潔易讀；VBA 語法較冗長
-- VBA 被鎖在 Excel 內，Python 可以處理任何格式（CSV、JSON、XML、資料庫）
-- 處理大量資料時（數十萬筆以上）Python 速度遠快於 VBA
+- Python語法簡潔易讀；VBA語法較冗長
+- VBA限於處理Excel檔案，Python可以處理任何格式(CSV、JSON、XML、TXT)
+- 處理大量資料時(數十萬筆以上)Python速度快於VBA
+
 
 
 ## 實際案例：實價登錄資料的清理與統計
@@ -82,13 +83,16 @@ transition: slide     # 切換動畫：slide / fade / convex / none
 
 <div style="flex: 1;">
 - 自<a href='https://plvr.land.moi.gov.tw/DownloadOpenData'>內政部實價登錄網頁</a>定期下載資料
-  - 每一次下載的原始資料檔共有236個檔案，包含各縣市成屋預售屋、土地、車位、建物資料
-
-
+<br>
+- 每一次下載的`.zip`檔案逾200筆資料
+<br>
+- 包含各縣市成屋預售屋、土地、車位、建物資料
+<br>
+- **需定期批次彙整各縣市、各類別交易資料**
 
 </div>
 
-<div style="flex: 1.5; display: flex; align-items: center;">
+<div style="flex: 1; display: flex; align-items: center;">
 | 代碼 | 地區 |
 |------|------|
 | `_a` | **成屋交易(合計)** |
@@ -105,113 +109,81 @@ transition: slide     # 切換動畫：slide / fade / convex / none
 
 </div>
 </div>
-## 資料夾內容
+## 資料夾內容快照(部分擷圖)
 
 <img src="mdfiles/fig1_1.png" style="width: 400%; height: auto;">
 
 
-## 透過 Python，我們能夠：
 
-> 每期公布的壓縮檔內含數十個以縣市代碼與交易類別命名的 CSV 檔案
-> （如 `a_a.csv`、`f_b.csv`）
+## 運用Python進行批次工作：
 
-1. **自動辨識**所有符合規則的檔案（`pathlib.Path`, 正則表達式）
-2. **批次讀取與彙整**全國各縣市資料（`pandas`）
-3. **從檔名中萃取**縣市代碼與交易類別（`re` 正則表達式）
-4. **進行數值運算與統計**（`numpy`）
-5. 最終完成可重現、可更新的分析流程
+1. **辨識並篩選**所有符合規則的檔案（`pathlib.Path`,`re` 正則表達式）
+2. **批次讀取與彙整**全國各縣市資料（`pandas`、資料合併）
+3. **進行數值運算與統計**（`datetime`,`numpy` 標註時間、數值計算）
+4. 最終完成可重現、可更新的分析流程(`pandas`，資料聚合)
+
+
+本次課程目標：<br>
+**找出資料夾內各縣市的預售屋交易資料，彙整以下統計**
+
+- 主要都會區交易量資料(月統計、季統計)
+- 主要都會區平均總價中位數、平均數(月統計、季統計)
 
 
 ## 課程大綱（約2小時）
 
-
 | 節次 | 主題 | 時間 |
 |:---:|:---|:---:|
-| 1 | **課程簡介與動機** | 10分鐘 (15:00~15:10)|
-| 2 | **基本Python介紹** | 25分鐘(15:10~15:35)|
-| 3 | **pandas：資本資料讀取與合併**| 25分鐘(15:35~16:00)  |
+| 0 | **課程簡介** | 10分鐘 (15:00~15:10)|
+| 1 | **基本Python介紹** | 25分鐘(15:10~15:35)|
+| 2 | **資本資料讀取與合併**| 25分鐘(15:35~16:00)  |
 | — | 休息 or QA | 10 分鐘 (16:00~16:10)|
-| 4 | **re + numpy + datetime：資料清理** | 30 分鐘(16:10~16:40) |
-| 5 | **綜合實作:計算預售屋各縣市交易量與每坪單價** | 10 分鐘 (16:40~16:50) |
+| 3 | **re + numpy + datetime：資料清理** | 30 分鐘(16:10~16:40) |
+| 4 | **綜合實作:計算預售屋各縣市交易量與價格統計** | 10 分鐘 (16:40~16:50) |
 
 **共計100分鐘**
 
-## Lecture 2：pandas 重點
-
-- 讀取 CSV / Excel 檔案
-- 資料篩選（`loc`、`query`）
-- 分組統計（`groupby`）
-- 多檔合併（`concat`、`merge`）
-
-## Lecture 3：pandas 重點
-
-- 讀取 CSV / Excel 檔案
-- 資料篩選（`loc`、`query`）
-- 分組統計（`groupby`）
-- 多檔合併（`concat`、`merge`）
 
 
-```python
-import pandas as pd
+## 各節重點預覽（1）：基本Python介紹
 
-df = pd.read_csv("a_a.csv")
-df.head()
-```
+1. Python直譯器是什麼（計算機類比）
+2. 兩種執行方式（Shell vs Colab/Jupyter）
+3. 基本型態：`int`、`str`、`list`、`dict`
+4. 函式概念（callable vs 變數，type hint簡介）
+5. `for` 迴圈 + `if` 條件判斷
 
+---
 
-## Lecture 4：正則表達式（re）
+## 各節重點預覽（2）：資料讀取與合併
 
-- 基本語法：`[]`、`*`、`+`、`?`、`()`
-- 從檔名中萃取縣市代碼與交易類別
-- 資料欄位中的文字清理
+1. 資料路徑的尋找與檔案名稱（`pathlib.Path`）
+2. 搜尋目標檔案（`re`）
+3. 單檔讀取（`pandas`，`pd.read_csv`）
+4. 多檔合併（`pd.concat`）
 
-```python
-import re
+---
 
-filename = "a_a.csv"
-match = re.match(r"([a-z]+)_([a-z]+)\.csv", filename)
-print(match.group(1))  # 縣市代碼
-print(match.group(2))  # 交易類別
-```
+## 各節重點預覽（3）：資料清理
 
+1. 交易年月日欄位的轉換（`datetime`）
+2. 住宅交易篩選（`str.contains`）
+3. 都會區資料的聚合（六都 vs 非六都，`str.contains` + `apply`）
+4. 每坪單價換算（排除車位價格，`np.where`）
+5. 資料匯出（`to_excel`、`to_csv`）
 
-## Lecture 5：numpy 重點
+---
 
-- 陣列建立與基本運算
-- 統計函數（`mean`、`std`、`percentile`）
-- 與 pandas 的搭配使用
+## 各節重點預覽（4）：綜合實作
 
-```python
-import numpy as np
+1. 資料聚合（`groupby`）
+   - 計算交易量
+   - 聚合函數（`mean`、`median`、`count`）
+   - 結果匯出(csv, excel檔案)
+2. 結果展示與說明
+   - 回顧整支腳本的流程
+   - 每一行對應哪個概念
 
-prices = np.array([1500, 2000, 3500, 8500, 12000])
-print(np.mean(prices))
-print(np.percentile(prices, 75))
-```
-
-
-## Lecture 6：pathlib.Path 重點
-
-- 路徑的表示與操作
-- 列出資料夾下所有檔案（`glob`）
-- 根據命名規則篩選目標檔案
-
-```python
-from pathlib import Path
-
-data_dir = Path("data/")
-
-# 找出所有成屋交易合計檔案（*_a.csv）
-files = list(data_dir.glob("*_a.csv"))
-print(files)
-```
-
-
-## 課程結語：回到業務現場
-
-> 假設你收到了一份新的實價登錄壓縮檔，裡面有數十個依縣市與交易類別命名的 CSV 檔案。
-> 你能用今天學到的工具，在 **10 分鐘內**完成全國成屋交易資料的彙整與基礎統計嗎？
-
-
+  
 
  
