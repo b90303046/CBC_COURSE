@@ -22,7 +22,7 @@
 
 /*程式碼設定*/
 .reveal pre code {
-  font-size: 1.5em !important;
+  font-size: 1.2em !important;
 }
 
 .reveal :not(pre) > code {
@@ -52,9 +52,17 @@
   transform: none !important;
 }
 
+.highlight {
+    background-color: yellow;
+    font-weight: bold;
+    color: blue;
+    padding: 0 4px;
+}
+
 /* 
-pandoc mdfiles/2_basic.md -t revealjs -o lecture/2_basic.html `
+pandoc mdfiles/4_data_clean.md -t revealjs -o lecture/4_data_clean.html `
   --embed-resources --standalone --slide-level=2 `
   -V revealjs-url=./reveal.js `
   --css=custom.css
+  
 */
