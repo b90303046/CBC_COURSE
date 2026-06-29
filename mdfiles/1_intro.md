@@ -5,7 +5,7 @@
 title: 運用Python進行資料清理之實務操作：
 subtitle: 內政部不動產交易實價登錄資料之建構、清理與分析
 author: 俞欣榮
-date: 2024年月
+date: 202年7月
 institute: 中央銀行經濟研究處
 theme: white          # reveal.js 主題：black / white / moon / solarized / sky
 slideNumber: true     # 顯示投影片頁碼
@@ -19,7 +19,7 @@ transition: slide     # 切換動畫：slide / fade / convex / none
 - 實際案例：實價登錄資料庫的處理
 - 課程大綱與時間安排
 - 各節重點預覽
-- 課程結語
+ 
 
 
 ## 央行為何要關注不動產市場 ?
@@ -174,15 +174,14 @@ transition: slide     # 切換動畫：slide / fade / convex / none
 
 ---
 
-## 各節重點預覽（4）：綜合實作
+## 各節重點預覽(4)：基本統計分析
 
 1. 資料聚合（`groupby`）
    - 計算交易量
    - 聚合函數（`mean`、`median`、`count`）
-   - 結果匯出(csv, excel檔案)
-2. 結果展示與說明
-   - 回顧整支腳本的流程
-   - 每一行對應哪個概念
+
+2. 結果匯出(csv, excel檔案)
+ 
 
   
 

@@ -60,7 +60,7 @@
 }
 
 /* 
-pandoc mdfiles/4_data_clean.md -t revealjs -o lecture/4_data_clean.html `
+pandoc mdfiles/5_data_summary.md -t revealjs -o lecture/5_data_summary.html `
   --embed-resources --standalone --slide-level=2 `
   -V revealjs-url=./reveal.js `
   --css=custom.css

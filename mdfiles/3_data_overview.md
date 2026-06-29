@@ -158,7 +158,7 @@ print(df.values)
   ```
 ---
 
-## `df.info()`：資料初步檢查
+## `df.info()`：資料初步檢查(以a_lvr_land_b.csv為例)
 
 ```python
 df.info()
@@ -205,7 +205,7 @@ memory usage: 613.9 KB
 3. 運用`pd.concat`合併所有下載完的資料
 
 ```python
-# 逐一讀取並合併
+# 逐一讀取並合併(2026Q1)
 df_list = []
 for f in presale_files:
     city = f.stem[0] # 取出第一個字碼, 等等轉為城市

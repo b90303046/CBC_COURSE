@@ -5,3 +5,5 @@ lecture/
 *.vscode
 *.png
 tmp.md
+*.csv
+*.xlsx
