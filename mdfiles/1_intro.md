@@ -2,7 +2,7 @@
 # =========================================
 # YAML Front Matter
 # ===========================================
-title: 運用Python進行資料清理之實務操作：
+title: 運用Python進行資料清理之實務操作： 
 subtitle: 內政部不動產交易實價登錄資料之建構、清理與分析
 author: 俞欣榮
 date: 202年7月
@@ -58,11 +58,11 @@ transition: slide     # 切換動畫：slide / fade / convex / none
   1. 經研處金統科資料
   2. 業務局受限貸款資料
   3. 金檢處相關放款統計(RU01~RU03、法定比率...)
-  4. 聯徵中心資料放款資料
+  4. 聯徵中心放款資料
 
 - 相關不動產政策統計
   1. 新青安統計
-  2. 國際BIS房價所得比資料
+  2. 國際清算銀行(BIS)房價所得比資料
 
 ⇒ 　<span class='highlight'>需定期蒐集資料進行統計，辦理經濟研究相關工作</span>
 
@@ -72,14 +72,14 @@ transition: slide     # 切換動畫：slide / fade / convex / none
 - 大量結構化資料(CSV、Excel)需要定期整理與彙整
 - 資料清理耗費大量人工，且容易出錯
 - Python語法簡潔易讀；VBA語法較冗長
-- VBA限於處理Excel檔案，Python可以處理任何格式(CSV、JSON、XML、TXT)
+- VBA限於處理Excel檔案，Python可以處理不同檔案格式(CSV、JSON、XML、TXT)
 - 處理大量資料時(數十萬筆以上)Python速度快於VBA
 
 | | VBA | Python |
 |:---|:---|:---|
 | 處理大量資料 | 慢，會卡頓 | 快，pandas底層用C優化 |
 | 檔案數量上限 | 受Excel視窗開關限制 | 沒有實質上限 |
-| 程式碼可讀性 | 較繁瑣（Range, Cells操作）| 較簡潔（一行`pd.concat`） |
+| 程式碼可讀性 | 較繁瑣  | 較簡潔  |
 
 ## 實際案例：實價登錄資料的清理與統計
 
@@ -114,21 +114,21 @@ transition: slide     # 切換動畫：slide / fade / convex / none
 
 </div>
 </div>
-## 資料夾內容快照(部分擷圖)
+## 資料夾內容快照(2026Q1成交資料部分擷圖)
 
 <img src="mdfiles/fig1_1.png" style="width: 400%; height: auto;">
 
 
 
-## 運用Python進行批次工作：
+## 本堂課程目標：運用Python進行以下批次工作：
 
 1. **辨識並篩選**所有符合規則的檔案（`pathlib.Path`）
 2. **批次讀取與彙整**全國各縣市資料（`pandas`、資料合併）
-3. **進行數值運算與統計**（`datetime`,`numpy` 標註時間、數值計算）
-4. 最終完成可重現、可更新的分析流程(`pandas`，資料聚合)
+3. **進行數值運算與統計**（`datetime`, `numpy` 標註時間、數值計算）
+4. 完成可重現、可持續更新的分析流程(`pandas`，資料聚合)
 
 
-本次課程目標：<br>
+本次課程主要任務：<br>
 **找出資料夾內各縣市的預售屋交易資料，彙整以下統計**
 
 - 主要都會區交易量資料(月統計、季統計)
@@ -163,7 +163,7 @@ transition: slide     # 切換動畫：slide / fade / convex / none
 
 ## 各節重點預覽（2）：資料讀取與合併
 
-1. 資料路徑的尋找與檔案名稱（`pathlib.Path`）
+1. 依據資料路徑尋找特定檔案名稱（`pathlib.Path`）
 2. 單檔讀取（`pandas`，`pd.read_csv`）
 3. 資料初步概觀、 DataFrame結構介紹
 4. 多檔合併（`pd.concat`）
@@ -185,7 +185,8 @@ transition: slide     # 切換動畫：slide / fade / convex / none
 3. 文字處理(`str.contains`):
    - 住宅交易篩選
    - 主要用途篩選
-4. 處理數字欄位
+4. 處理數字欄位：
+
    -應用: 每坪單價換算（排除車位價格，`np.where`）
  
 

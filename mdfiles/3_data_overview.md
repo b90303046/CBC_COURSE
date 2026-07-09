@@ -2,9 +2,7 @@
 # =========================================
 # YAML Front Matter
 # ===========================================
-title: 運用Python進行資料清理之實務操作： 
-subtitle: 資料讀取與合併
-
+title: 運用Python進行資料清理之實務操作： <br> 資料讀取與合併
 author: 俞欣榮
 date: 2026年7月
 institute: 中央銀行經濟研究處
@@ -77,6 +75,7 @@ print(presale_files)
 - 檔案名稱: `file.stem` / `file.name` (含副檔名)
 - 檢查是檔案/資料夾: `Path.is_file`/`Path.is_dir()`
 
+<span class='highlight'>了解資料的位置後，接下來進行資料批次處理</span>
 
 ---
 
@@ -122,11 +121,8 @@ print(presale_files)
 
 - 內政部實價登錄資料早期多為 `cp950`，近年逐漸改為 `utf-8`  
 - 遇到 `UnicodeDecodeError` 時，先試<span class='highlight'> `cp950`</span>
-- 匯入成功, 先看前幾筆(預設5筆)資料
+- 匯入成功, 先看前幾筆(預設5筆)資料：`df.head()`
 
-  ```python
-    df.head()
-  ```
 
 ---
 
@@ -202,7 +198,7 @@ memory usage: 613.9 KB
 
 ## 資料合併: `pd.concat`：垂直堆疊多個 DataFrame
 
-- 實價登錄資料通常**每個縣市一個檔案(a: 台北市, b:台中市...)**，需要<span class='highlight'>合併成一張大表</span>
+- 實價登錄資料通常**每個縣市的交易**獨立成一個檔案(a: 台北市, b:台中市...)，因此需<span class='highlight'>合併成一張大表</span>
 1. 先前已整理`presale_files`，列出各縣市的實價登錄資料
 2. 寫一個 `for`迴圈， 搭配`pd.read_csv`， 讀取所有的資料
 3. 運用`pd.concat`合併所有下載完的資料
@@ -219,6 +215,7 @@ for f in presale_files:
 presale = pd.concat(df_list, join='outer', axis=0, ignore_index=True)
 print(presale.shape)
 ```
+
 ---
 
 ## `pd.concat`參數說明
