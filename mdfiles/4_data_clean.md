@@ -29,9 +29,9 @@ transition: slide     # 切換動畫：slide / fade / convex / none
 
 ## 回顧上一節課程：
 
-之前執行`pd.read_csv`, 受到第一列英文名稱影響，所有資料都自動轉成字串
+- 之前執行`pd.read_csv`, 受到第一列英文名稱影響，所有資料都自動轉成字串
 
-實價登錄資料中，最常使用的資料欄位有幾個:
+- 實價登錄資料中，最常使用的資料欄位有幾個:
 
 1. 交易年月日 
 2. 交易標的 (房地、土地、建物、車位)
@@ -40,7 +40,7 @@ transition: slide     # 切換動畫：slide / fade / convex / none
 5. 建物移轉總面積平方公尺
 
 
-實價登錄並未<span class='highlight'>該筆交易的城市</span>, 需要自己補
+實價登錄並未<span class='highlight'>該筆交易的城市別</span>, 需要自己補
 
 ---
 
@@ -84,21 +84,22 @@ manifest
 **DataFrame運算小工具: `apply` + `lambda`**
 
 - 由於 'name', 'description' 都是文字,  可以使用文字的擷取
-- `apply` +  `lambda` 是特別設計給`pd.DataFrame`處理簡單運算的函式
+- `apply` +  `lambda` 是特別設計給`pd.DataFrame`對欄位進行簡單運算的功能
    - <span class='highlight'>一般函數亦可應用`apply`來修改資料</span>
 
 ```python
-manifest['name'] = manifest['name'].apply(lambda x: x[0])
-manifest['description'] =manifest['description'].apply(lambda x: x[:3])
+manifest['name'] = manifest['name'].apply(lambda x: x[0]) #只抓第一個字元
+manifest['description'] =manifest['description'].apply(lambda x: x[:3]) #只抓前三個字元
 ```
 
 **排除重複列** : 
+
 - 使用 `df.drop_duplicates()`
 - 使用 **dict** 與 list comprehension的方法建構對應關係
   
 ```python
 manifest_map = manifest[['name','description']].drop_duplicates() 
-city_map = {letter:city for letter,city in manifest_map.values}
+city_map = {letter:city for letter,city in manifest_map.values} #轉換為 dict
 ```  
 
 **建立對應關係後**，使用`map`函數置換"城市"欄位:
@@ -116,20 +117,6 @@ presale['城市'] = presale['城市'].map(city_map)
 1. 保留六都城市名稱
 2. 新竹市、新竹縣改為"新竹縣市"
 3. 其餘歸類為"其他地區"
-
-初步統計各城市交易:
-
-```python
->>> presale['城市'].value_counts()
-城市
-新北市    3042
-桃園市    2044
-.
-.
-基隆市      20
-澎湖縣       1
-Name: count, dtype: int64
-```
 
 定義以下函式:
 
@@ -168,7 +155,10 @@ presale['都會區'] = presale['城市'].apply(group_region)
 ```
 
 ```python
+# 轉為西元時間字串
 presale['交易年月日']=presale['交易年月日'].apply(lambda x: str(int(x[:3])+1911)+'-'+ x[3:5]+'-'+ x[5:])
+
+# 轉為西元時間格式資料
 presale['交易年月日']=pd.to_datetime(presale['交易年月日'], format = '%Y-%m-%d')
 >>> presale['交易年月日'].head()
 1   2025-11-11
@@ -209,11 +199,14 @@ Name: count, dtype: int64
 
 <span class='highlight'>`df.value_counts()`可以初步針對"類別變數"進行初步統計</span>
 
+- 可測試剛剛的"城市別"與"都會區"欄位
+
 ---
 
 ## 文字處理(類別變數)的篩選
 
 在進行不動產交易資料分析中，主要關注以下交易：
+
 1. 交易標的：房地(土地+建物)+車位、 房地(土地+建物)
 2. 主要用途：與住相關的交易(住家用、住商用)
 
@@ -253,10 +246,12 @@ Name: count, dtype: int64
 ## 處理數字欄位(1)
 
 實價登錄資料中，重要的數字欄位資料如下：
+
 1. 總價元、 車位總價元、
 2. 建物移轉總面積平方公尺、車位移轉總面積平方公尺
 
-本節任務:
+**任務:**
+
    1. 將資料轉為數字欄位(目前為文字)
    2. 將總價元轉為萬元單位;  平方公尺轉為坪
    3. 在排除車位面積與車位價格後，計算每坪單價
@@ -264,7 +259,7 @@ Name: count, dtype: int64
 **轉換數字功能**: `pd.to_numeric`，並強制將有問題的資料強制轉為NaN
 
 ```python
-# 定義num_cols list
+# 定義num_cols list, 並執行迴圈
 num_cols = ['總價元','車位總價元','建物移轉總面積平方公尺','車位移轉總面積平方公尺']
 
 for col in num_cols:
@@ -275,12 +270,12 @@ presale_clean.info()
 
 ---
 
-## 處理數字欄位(2)：排除車位
+## 處理數字欄位(2)：排除車位後計算每坪單價
 
 計算不含停車位的每坪面積，公式如下：
 
-- 成交價格：如果車位價格大於等於0，則扣除車位價格：若車位價格無資料，則維持原總價格
-- 成交面積：如果車位ａ面積大於等於0，則扣除車位面積：若車位面積無資料，則維持原面積
+- 成交價格：如果車位價格大於等於0，則總價格扣除車位價格：若車位價格無資料，則維持原總價格
+- 成交面積：如果車位面積大於等於0，則扣除車位面積：若車位面積無資料，則維持原面積
 - 使用套件`numpy` 中的`np.where`設計以下條件(參考<a href='https://numpy.org/doc/stable/reference/generated/numpy.where.html'>連結</a>)
 
 

@@ -15,7 +15,7 @@ transition: slide     # 切換動畫：slide / fade / convex / none
 ## 本節課程大綱(課程簡介)
 
 - 央行為何要關注不動產市場
-- Python 在資料處理上的應用
+- 使用Python而不使用VBA的原因
 - 實際案例：實價登錄資料庫的處理
 - 課程大綱與時間安排
 - 各節重點預覽
@@ -36,7 +36,7 @@ transition: slide     # 切換動畫：slide / fade / convex / none
 - 2024年底國富毛額為330.11 兆元，不動產相關近60%
 - 2025年不動產放款占總放款達 **35%** 以上
 - 本行肩負總體與金融穩定政策目標  
-  → 完善不動產統計是研擬政策與措施的基石
+  → <span class='highlight'>完善不動產統計是研擬政策與措施的基石</span>
 :::
 
 ::: {style="flex: 0.8; display: flex; align-items: right;"}
@@ -64,7 +64,7 @@ transition: slide     # 切換動畫：slide / fade / convex / none
   1. 新青安統計
   2. 國際BIS房價所得比資料
 
-⇒ 需定期蒐集資料進行統計，辦理經濟研究相關工作
+⇒ 　<span class='highlight'>需定期蒐集資料進行統計，辦理經濟研究相關工作</span>
 
 
 ## 使用Python而不使用VBA的原因
@@ -75,7 +75,11 @@ transition: slide     # 切換動畫：slide / fade / convex / none
 - VBA限於處理Excel檔案，Python可以處理任何格式(CSV、JSON、XML、TXT)
 - 處理大量資料時(數十萬筆以上)Python速度快於VBA
 
-
+| | VBA | Python |
+|:---|:---|:---|
+| 處理大量資料 | 慢，會卡頓 | 快，pandas底層用C優化 |
+| 檔案數量上限 | 受Excel視窗開關限制 | 沒有實質上限 |
+| 程式碼可讀性 | 較繁瑣（Range, Cells操作）| 較簡潔（一行`pd.concat`） |
 
 ## 實際案例：實價登錄資料的清理與統計
 
@@ -84,15 +88,16 @@ transition: slide     # 切換動畫：slide / fade / convex / none
 <div style="flex: 1;">
 - 自<a href='https://plvr.land.moi.gov.tw/DownloadOpenData'>內政部實價登錄網頁</a>定期下載資料
 <br>
-- 每一次下載的`.zip`檔案逾200筆資料
+- 每一次下載的`.zip`檔案有許多csv檔案
 <br>
-- 包含各縣市成屋預售屋、土地、車位、建物資料
+- 各縣市成屋預售屋、土地、車位、建物資訊
 <br>
 - **需定期批次彙整各縣市、各類別交易資料**
 
 </div>
 
 <div style="flex: 1; display: flex; align-items: center;">
+
 | 代碼 | 地區 |
 |------|------|
 | `_a` | **成屋交易(合計)** |
@@ -117,7 +122,7 @@ transition: slide     # 切換動畫：slide / fade / convex / none
 
 ## 運用Python進行批次工作：
 
-1. **辨識並篩選**所有符合規則的檔案（`pathlib.Path`,`re` 正則表達式）
+1. **辨識並篩選**所有符合規則的檔案（`pathlib.Path`）
 2. **批次讀取與彙整**全國各縣市資料（`pandas`、資料合併）
 3. **進行數值運算與統計**（`datetime`,`numpy` 標註時間、數值計算）
 4. 最終完成可重現、可更新的分析流程(`pandas`，資料聚合)
@@ -127,19 +132,20 @@ transition: slide     # 切換動畫：slide / fade / convex / none
 **找出資料夾內各縣市的預售屋交易資料，彙整以下統計**
 
 - 主要都會區交易量資料(月統計、季統計)
-- 主要都會區平均總價中位數、平均數(月統計、季統計)
+- 主要都會區平均總價/每坪單價中位數、平均數(月統計、季統計)
 
 
-## 課程大綱（約2小時）
+## 課程大綱與時間安排（約2小時）
 
 | 節次 | 主題 | 時間 |
 |:---:|:---|:---:|
 | 0 | **課程簡介** | 10分鐘 (15:00~15:10)|
 | 1 | **基本Python介紹** | 25分鐘(15:10~15:35)|
-| 2 | **資本資料讀取與合併**| 25分鐘(15:35~16:00)  |
+| 2 | **資本資料讀取與合併** | 25分鐘(15:35~16:00)  |
 | — | 休息 or QA | 10 分鐘 (16:00~16:10)|
-| 3 | **re + numpy + datetime：資料清理** | 30 分鐘(16:10~16:40) |
-| 4 | **綜合實作:計算預售屋各縣市交易量與價格統計** | 10 分鐘 (16:40~16:50) |
+| 3 | **資料清理** | 30 分鐘(16:10~16:40) |
+| 4 | **基本統計分析** | 10 分鐘 (16:40~16:50) |
+
 
 **共計100分鐘**
 
@@ -149,38 +155,49 @@ transition: slide     # 切換動畫：slide / fade / convex / none
 
 1. Python直譯器是什麼（計算機類比）
 2. 兩種執行方式（Shell vs Colab/Jupyter）
-3. 基本型態：`int`、`str`、`list`、`dict`
+3. 基本變數型態：`int`、`float`、`str`、`list`、`dict`
 4. 函式概念（callable vs 變數，type hint簡介）
-5. `for` 迴圈 + `if` 條件判斷
+5. `for` 迴圈 + `if` 條件判斷 (包含`Boolean`變數)
 
 ---
 
 ## 各節重點預覽（2）：資料讀取與合併
 
 1. 資料路徑的尋找與檔案名稱（`pathlib.Path`）
-2. 搜尋目標檔案（`re`）
-3. 單檔讀取（`pandas`，`pd.read_csv`）
+2. 單檔讀取（`pandas`，`pd.read_csv`）
+3. 資料初步概觀、 DataFrame結構介紹
 4. 多檔合併（`pd.concat`）
+
+本課程使用資料來源：2026年Q1實價登錄資料檔<a href="https://drive.google.com/file/d/1yxuy2vnZl-jDd_uejk6MZJyzqSXqOyAQ/view?usp=sharing">(連結)</a>
+
+
+本課程相關檔案放置於Github網頁(<a href="https://github.com/b90303046/CBC_COURSE/tree/master">網址</a>)
+
 
 ---
 
 ## 各節重點預覽（3）：資料清理
 
-1. 交易年月日欄位的轉換（`datetime`）
-2. 住宅交易篩選（`str.contains`）
-3. 都會區資料的聚合（六都 vs 非六都，`str.contains` + `apply`）
-4. 每坪單價換算（排除車位價格，`np.where`）
-5. 資料匯出（`to_excel`、`to_csv`）
+
+1. 補上交易城市別
+   - 都會區資料的對應與彙整(mapping)
+2. 交易年月日欄位的轉換（`datetime`）
+3. 文字處理(`str.contains`):
+   - 住宅交易篩選
+   - 主要用途篩選
+4. 處理數字欄位
+   -應用: 每坪單價換算（排除車位價格，`np.where`）
+ 
 
 ---
 
 ## 各節重點預覽(4)：基本統計分析
 
-1. 資料聚合（`groupby`）
-   - 計算交易量
-   - 聚合函數（`mean`、`median`、`count`）
-
-2. 結果匯出(csv, excel檔案)
+1. 調整交易年月日格式
+2. 資料聚合
+   - 基本概念與指令
+   - 資料聚合應用: 計算交易量、每坪單價中位數
+3. 資料匯出（`to_csv`、`to_excel`）
  
 
   

@@ -34,8 +34,9 @@ transition: slide     # 切換動畫：slide / fade / convex / none
 
 - 打 `2 + 2`，得到 `4`
 - 打 `5 * 5`，得到 `25`
-- 輸入指令 → 立即回應
-**Python 直譯器**
+- 輸入指令 → 立即回應 → 直譯器
+- **Python 具有直譯器的特性**
+
 ```python
 >>> 2 + 2
 4
@@ -44,6 +45,7 @@ transition: slide     # 切換動畫：slide / fade / convex / none
 >>> "中央銀行" + "經濟研究處" # 字串處理
 '中央銀行經濟研究處'
 ```
+
 :::
  
 ::: {style="flex: 0.8; display: flex; align-items: right;"}
@@ -57,6 +59,7 @@ transition: slide     # 切換動畫：slide / fade / convex / none
 `Python` 和 `R`、`Matlab`一樣，屬於**直譯器**語言——輸入指令，立即執行，不需要事先編譯。
 
 Python 能做計算機做不到的事(舉例)
+
 ```python
 # 1. 儲存結果
 x = 2 + 2
@@ -68,7 +71,8 @@ for p in prices:
     print(p * 0.9)
 ```
 **Python 直譯器才是核心**，Jupyter、VS Code 只是協助寫程式、管理檔案的介面。
-- 和VBA比較
+
+**和VBA比較**
 
 | VBA | Python  |
 |:---|:---|
@@ -84,7 +88,7 @@ for p in prices:
 
 ::: {style="flex: 1;"}
 
-**方式一：直譯器（終端機）**
+**方式一：直譯器(終端機)**
 
 直接在終端機啟動，逐行執行，即時回應
 
@@ -111,10 +115,10 @@ Hello, World!
 
 在瀏覽器(Chrome, Edge)裡執行，以格子(Cell)為單位
 
-- 畫面友善，適合邊寫邊看結果
+- 畫面友善，<span class = 'highlight'>適合邊寫邊看結果</span>
 - 背後其實是 **IPython**（Python 的強化版互動介面）
 - Cell 的概念是 IPython 加上的，不是 Python 原生的
-- 程式碼存為 `.ipynb`，格子與輸出結果一起儲存
+- 程式碼存為 `.ipynb`，Cell與輸出結果一起儲存
 :::
 
 :::
@@ -124,7 +128,7 @@ Hello, World!
 **Python Shell**
 <img src="mdfiles/shell.png" style="width: 100%;">
 
-- 在Windows電腦開啟Powershell後輸入`Python` 
+- 在Windows電腦開啟Powershell後輸入`python` 
 - 進入環境後, 可輸入`exit()`離開
 
 
@@ -139,7 +143,7 @@ Hello, World!
 ## Python基本型態
 
 - Python中，每一個變數都有屬於自己的<span class="highlight">型態</span>，各種型態的屬性也不同
-- 比如數字類的變數可以進行運算，文字類的變數可以搜尋與取出，陣列類的變數可以進行迭代
+- 比如數字類的變數可以進行**運算**，文字類的變數可以**搜尋**與**取出**，陣列類的變數可以進行迭代
 - 各有各自合法運算和處理的功能
 - 可以運用指令`type()`去檢視這個變數的型態
 
@@ -172,8 +176,8 @@ area  = 32.5
 price = 1500.0
 
 # str：文字
-name = "實價登錄"
-city = "臺北市"
+name = "臺北市預售屋買賣"
+city = name[:3] # 文字可以進行切片
 
 # 型態轉換
 int(32.5)       # 32     （小數 → 整數，直接截斷）
@@ -181,12 +185,14 @@ float(1500)     # 1500.0
 str(2024)       # "2024"
 ```
 
-- **注意字串與數值無法進行運算**
+- **注意字串與數值兩類變數型態不同，無法進行運算**
+- <span class='highlight'>型態決定了一個變數**能做什麼運算**，也是後續寫函式時 type hint 的基礎</span>
 
 
 ## list：有序清單
 
 **`list` 是 Python 最常用的資料結構**
+
 - list：可以裝不同型態
 - Python 的第一個數字是從`0`開始 
 
@@ -237,15 +243,17 @@ record["單價"] = record["總價"] / record["坪數"]
 record.keys()
 ```
 
-**`dict` 的key必須是唯一。若重複，後面的會覆蓋先前的結果**
-
+- **`dict` 的key必須是唯一。若重複，後面的會覆蓋先前的結果**。
+- 政府開放資料平台回傳的資料格式都是JSON，讀進Python後就是`dict`。
 
 ## 函式
 
 - 函式也是變數的一種
     - **普通變數** → 存放數字、字串、串列  
     - **函式變數** → 存放「可以被呼叫執行的動作」
-> 差別只有一個：函式是 **callable**（可呼叫的）。
+
+- <span class='highlight'>差別只有一個：函式是 **callable**（可呼叫的）。</span>
+
 
 - 函式的用途：**自行設計一個類似計算機上可重複使用的「自訂按鍵」**
 
@@ -267,7 +275,7 @@ price3 = 計算單價(6200000, 28.7)
 
 ## 函式的型別提示（Type Hint）
 
-設計函式時，**建議對輸入與輸出進行型別提示**
+<span class='highlight'>設計函式時，**建議對輸入與輸出進行型別提示** </span>
 
 ```python
 # 沒有type hint：不知道要傳入什麼、會回傳什麼
@@ -275,7 +283,7 @@ def 計算單價(總價, 面積):
     return 總價 / 面積
 
 # 有type hint：清楚標示輸入與輸出的型態
-def 計算單價(總價: int|float, 面積: float) -> float:
+def 計算單價(總價: int|float, 面積: float) -> float:  # 總價可以是整數或是浮點數
     return 總價 / 面積
 ```
 
@@ -285,8 +293,8 @@ def 計算單價(總價: int|float, 面積: float) -> float:
 - `面積: float` → 這個參數應該傳入浮點數
 - `-> float` → 這個函式會回傳浮點數
 
-> 類似Excel裡設定「這格是數字、那格是文字」——  
-> type hint讓你跟別人都清楚這個函式在處理什麼型態的資料。
+類似Excel裡設定「這格是數字、那格是文字」——  <br>
+<span class='highlight'>type hint方便讓大家清楚這個函式在處理什麼型態的資料。</span>
 
 
 ## `for` 迴圈
@@ -305,7 +313,7 @@ for p in prices:     # p即是迭代prices裡面的元素
    - **注意：`range()` 不會直接顯示數字**
 
 ```python
-# range(5) 產生產生 0, 1, 2, 3, 4
+# range(5) 產生 0, 1, 2, 3, 4
 result = [i**2 for i in range(5)] # 簡潔寫法(list comprehension), 產生0, 1, 4, 9, 16 
 ```
 
@@ -353,8 +361,10 @@ print('執行結束')  # 因為和for同一層級，只會印一次
 
 
 ## 綜合應用 : list of dict
+
 考慮以下隨機從實價登錄抓出來的部分資料
-  - 資料外層是list, 每一個list的元素是dict
+
+  - 資料外層是list, 每一個list的元素是dict (json list 檔案)
   - 每一個dict的鍵(key)是交易資訊(交易年月日、城市、...):
 
 ```python
