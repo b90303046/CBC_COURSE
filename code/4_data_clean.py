@@ -2,6 +2,7 @@
 from pathlib import Path
 import pandas as pd
 from pprint import pprint
+import numpy as np
 
 def group_region(x:str) -> str:
    metro_6 = ['臺北市','新北市','桃園市','臺中市','臺南市','高雄市']
@@ -35,7 +36,7 @@ presale = pd.concat(df_list, join='outer', axis=0, ignore_index=True)
 # 第三節課程開始
 
 # 處理城市資料
-manifest = pd.read_csv('D:/RETR_data/2026q1/manifest.csv', encoding='utf-8')
+manifest = pd.read_csv('./data/2026q1/manifest.csv', encoding='utf-8')
 manifest['name'] = manifest['name'].apply(lambda x: x[0])
 manifest['description'] =manifest['description'].apply(lambda x: x[:3])
 manifest_map = manifest[['name','description']].drop_duplicates() 

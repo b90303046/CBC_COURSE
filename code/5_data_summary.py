@@ -37,7 +37,7 @@ presale = pd.concat(df_list, join='outer', axis=0, ignore_index=True)
 # 第三節課程開始
 
 # 處理城市資料
-manifest = pd.read_csv('D:/RETR_data/2026q1/manifest.csv', encoding='utf-8')
+manifest = pd.read_csv('./data/2026q1/manifest.csv', encoding='utf-8')
 manifest['name'] = manifest['name'].apply(lambda x: x[0])
 manifest['description'] =manifest['description'].apply(lambda x: x[:3])
 manifest_map = manifest[['name','description']].drop_duplicates() 
