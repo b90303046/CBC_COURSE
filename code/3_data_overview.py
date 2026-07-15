@@ -2,7 +2,7 @@ from pathlib import Path
 import pandas as pd
 from pprint import pprint
 
-dir_loc = Path("D:/RETR_data/2026q1")
+dir_loc = Path("./data/2026q1")
 
 presale_files = [jj for jj in dir_loc.glob('*_b.csv')]
 
