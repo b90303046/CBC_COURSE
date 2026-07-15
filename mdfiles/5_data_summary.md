@@ -2,9 +2,8 @@
 # =========================================
 # YAML Front Matter
 # ===========================================
-title: 運用Python進行資料清理之實務操作： 
-subtitle: 基本統計分析
-
+title: 運用Python進行資料清理之實務操作： <br>基本統計分析
+ 
 author: 俞欣榮
 date: 2026年7月
 institute: 中央銀行經濟研究處
@@ -40,7 +39,7 @@ transition: slide     # 切換動畫：slide / fade / convex / none
    ```
    是以年-月-日進行統計
 
-- 使用`.dt.to_period('M')`, `.dt.to_period('Q')`, `.dt.to_period('Y')`, 分別註記每一筆交易究竟是落在哪一個<span class='highlight'>交易月、交易季、交易年</span>的時間區段內
+- 使用`.dt.to_period('M')`、 `.dt.to_period('Q')`、 `.dt.to_period('Y')`，註記每一筆交易究竟是落在哪一個<span class='highlight'>交易月、交易季、交易年</span>的時間區段內
 
 ```python
 presale_clean['交易月'] = presale_clean['交易年月日'].dt.to_period('M') 
@@ -65,18 +64,22 @@ df.groupby(['欄位A', '欄位B']).統計函數()
 .sum()       # 加總
 ```
 
+<span class='highlight'>**`groupby` 後，分組欄位會自動變成 DataFrame 的 index**</span>
+
+ - 透過`unstack()`函數將部分index轉為欄位
+
 | 參數 | 說明 |
 |:---|:---|
 | `observed=False` | 沒有資料的組合也列出（值為 0 或 NaN） |
 | `.unstack('欄位')` | 將指定的 index 轉成欄位，方便閱讀 |
 
-<span class='highlight'>**`groupby` 後，分組欄位會自動變成 DataFrame 的 index**</span>
+
 
 ---
 
 ## 資料聚合統計(1)：計算交易量
 
-藉由標註交易時間的區段、搭配都會區的註記資料，進行以下計算：
+藉由標註交易時間的區段、搭配都會區欄位資料，進行以下計算：
 
 1. 給定特定「交易月」、「都會區」，彙整成交案件數量
 2. 給定特定「交易月」、「都會區」，計算總價元的中位數

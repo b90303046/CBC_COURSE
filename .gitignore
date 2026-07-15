@@ -2,9 +2,7 @@ reveal.js/
 code/data/
 lecture/
 *.gitignore
-*.svg
 *.vscode
-*.png
 tmp.md
 *.csv
 *.xlsx
