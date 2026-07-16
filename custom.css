@@ -64,5 +64,10 @@ pandoc mdfiles/5_data_summary.md -t revealjs -o lecture/5_data_summary.html `
   --embed-resources --standalone --slide-level=2 `
   -V revealjs-url=./reveal.js `
   --css=custom.css
-  
+
+pandoc mdfiles/5_data_summary.md -t revealjs -o lecture/5_data_summary.html `
+  --standalone --slide-level=2 `
+  -V revealjs-url=https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0 `
+  --css=../custom.css
+
 */

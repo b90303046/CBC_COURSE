@@ -126,7 +126,7 @@ Hello, World!
 ## 互動介面實例(Python Shell)
 
 **Python Shell**
-<img src="mdfiles/shell.png" style="width: 100%;">
+<img src="mdfiles/shell.png" style="width: 80%;">
 
 - 在Windows電腦開啟Powershell後輸入`python` 
 - 進入環境後, 可輸入`exit()`離開
@@ -134,7 +134,7 @@ Hello, World!
 
 ## 互動介面實例(Colab)
 
-<img src="mdfiles/colab.png" style="width: 100%;">
+<img src="mdfiles/colab.png" style="width: 80%;">
 
 - 直接在google輸入"colab"後登入使用
 

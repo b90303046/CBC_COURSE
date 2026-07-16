@@ -1,9 +1,11 @@
 reveal.js/
 code/data/
-lecture/
+*.pdf
 *.gitignore
 *.vscode
 tmp.md
 *.csv
 *.xlsx
+/lecture
 code/test.py
+file.txt

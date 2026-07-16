@@ -90,7 +90,7 @@ transition: slide     # 切換動畫：slide / fade / convex / none
 <br>
 - 每一次下載的`.zip`檔案有許多csv檔案
 <br>
-- 各縣市成屋預售屋、土地、車位、建物資訊
+- 各縣市成屋預售屋交易資訊
 <br>
 - **需定期批次彙整各縣市、各類別交易資料**
 
