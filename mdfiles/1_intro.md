@@ -5,7 +5,7 @@
 title: 運用Python進行資料清理之實務操作： 
 subtitle: 內政部不動產交易實價登錄資料之建構、清理與分析
 author: 俞欣榮
-date: 202年7月
+date: 2026-07-16
 institute: 中央銀行經濟研究處
 theme: white          # reveal.js 主題：black / white / moon / solarized / sky
 slideNumber: true     # 顯示投影片頁碼
