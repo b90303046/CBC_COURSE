@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>測試網頁</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #34495e;
+            --text-color: #333333;
+            --bg-color: #ffffff;
+            --light-bg: #f8f9fa;
+            --border-color: #e9ecef;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, Cambria, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Microsoft JhengHei", sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
+
+        /* 頂部導覽列 */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--accent-color);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: #3498db;
+        }
+
+        /* 主容器 */
+        .container {
+            max-width: 1000px;
+            margin: 80px auto 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* 個人簡介區塊 (About) */
+        .profile-section {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .profile-img {
+            width: 220px;
+            height: 220px;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 1px solid var(--border-color);
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .profile-info h1 {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .profile-title {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            margin-top: 15px;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        .contact-info a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        /* 通用區塊樣式 */
+        section {
+            padding: 40px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        section h2 {
+            font-size: 1.6rem;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        section h2::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+            margin-top: 8px;
+        }
+
+        /* 研究興趣標籤 */
+        .interests-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            background-color: var(--light-bg);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            border: 1px solid var(--border-color);
+        }
+
+        /* 列表項目 */
+        .item-list {
+            list-style: none;
+        }
+
+        .item-node {
+            margin-bottom: 25px;
+        }
+
+        .item-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .item-meta {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+
+        /* 按鈕組 */
+        .links-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .link-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 12px;
+            font-size: 0.85rem;
+            color: #34495e;
+            background-color: var(--light-bg);
+            border: 1px solid #ccd1d9;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .link-btn:hover {
+            background-color: #e6e9ed;
+            border-color: #aab2bd;
+            color: #000;
+        }
+
+        /* 頁尾 */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #95a5a6;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            background-color: var(--light-bg);
+        }
+
+        /* 自適應手機排版 */
+        @media (max-width: 768px) {
+            .profile-section {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 20px;
+            }
+            nav ul {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 頂部導覽列 -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">2026中央銀行人事室訓練課程</a>
+            <nav>
+                <ul>
+                    <li><a href="#teaching">課程教學</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- 1. 關於我區塊 -->
+        <section id="about" class="profile-section">
+            <!-- 如果您有個人照片，可以命名為 profile.jpg 放於專案根目錄。
+                 如果沒有，預設會顯示佔位圖。 -->
+            <img class="profile-img" src="mdfiles/DSC_0701.JPG" alt="Your Photo" >
+            
+            <div class="profile-info">
+                <h1>中央銀行2026年內部訓練課程</h1>
+                <div class="profile-title">運用Python進行資料清理之實務操作:內政部不動產交易實價登錄資料之建構、清理與分析</div>
+                <p>
+                 依台央人二字第1150009652辦理
+                </p>
+                <div class="contact-info">
+                    <p> &#x1F438; 講者姓名: 俞欣榮 </p>
+                    <p>📧 <a href="mailto:hjyu@mail.cbc.gov.tw " target="_blank">信箱:hjyu@mail.cbc.gov.tw</a></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 研究領域區塊 
+        <section id="research">
+            <h2>研究領域 (Research Interests)</h2>
+            <div class="interests-tags">
+                <span class="tag">a</span>
+                <span class="tag">b</span>
+                <span class="tag">c</span>
+            </div>
+        </section>-->
+
+        <!-- 3. 研究成果/工作論文區塊 
+        <section id="papers">
+            <h2>研究成果</h2>
+            <ul class="item-list">
+                <li class="item-node">
+                    <div class="item-title">無資料</div>
+                    <div class="item-meta">無名氏</div>
+                    <div class="links-group">
+                        <a class="link-btn" href="#" target="_blank">📄 摘要 (Abstract)</a>
+                        <a class="link-btn" href="#" target="_blank">⬇️ 下載 PDF</a>
+                    </div>
+                </li>
+            </ul>
+        </section>-->
+
+        <!-- 4. 教學與教材區塊 (完美對應您的 lecture 目錄檔案) -->
+        <section id="teaching">
+            <h2>訓練課程連結</h2>
+            <p style="margin-bottom: 20px; color: #7f8c8d;">以下為本課程Python資料分析課程教材，您可以線上瀏覽 Reveal.js 投影片，亦可下載對應之 PDF 講義：</p>
+            
+            <ul class="item-list">
+            <!-- 第五章 -->
+                <li class="item-node">
+                    <div class="item-title">本課程資料來源</div>
+                    <div class="links-group">
+                        <a class="link-btn" href="https://drive.google.com/file/d/1yxuy2vnZl-jDd_uejk6MZJyzqSXqOyAQ/view?usp=sharing" target="_blank">🖥️ 2026Q1實價登錄資料(亦可從實價登錄網頁下載)</a>
+                    </div>
+                </li>
+            </ul>
+                <!-- 第一章 -->
+                <li class="item-node">
+                    <div class="item-title">第 1 章：本科不動產業務統計介紹與課程大綱</div>
+                    <div class="item-meta">本科相關不動產分析業務簡介、</div>
+                    <div class="links-group">
+                        <a class="link-btn" href="./lecture/1_intro.html" target="_blank">🖥️ 線上投影片 (Reveal.js)</a>
+                    </div>
+                </li>
+
+                <!-- 第二章 -->
+                <li class="item-node">
+                    <div class="item-title">第 2 章：基本 Python 介紹</div>
+                    <div class="item-meta">資料型態、基本語法、流程控制與函式</div>
+                    <div class="links-group">
+                        <a class="link-btn" href="./lecture/2_basic.html" target="_blank">🖥️ 線上投影片 (Reveal.js)</a>
+                    </div>
+                </li>
+
+                <!-- 第三章 -->
+                <li class="item-node">
+                    <div class="item-title">第 3 章：資料讀取與合併</div>
+                    <div class="item-meta">Pandas 基礎、讀取 CSV資與合併操作</div>
+                    <div class="links-group">
+                        <a class="link-btn" href="./lecture/3_data_overview.html" target="_blank">🖥️ 線上投影片 (Reveal.js)</a>
+                        <a class="link-btn" href="code/3_data_overview.py" target="_blank">⬇️ 原始程式碼</a>
+                    </div>
+                </li>
+
+                <!-- 第四章 -->
+                <li class="item-node">
+                    <div class="item-title">第 4 章：資料清理</div>
+                    <div class="item-meta">處理時間資料、文字資料篩選、轉換欄位為數值</div>
+                    <div class="links-group">
+                        <a class="link-btn" href="./lecture/4_data_clean.html" target="_blank">🖥️ 線上投影片 (Reveal.js)</a>
+                        <a class="link-btn" href="code/4_data_clean.py" target="_blank">⬇️ 原始程式碼</a>
+                    </div>
+                </li>
+
+                <!-- 第五章 -->
+                <li class="item-node">
+                    <div class="item-title">第 5 章：基本統計分析</div>
+                    <div class="item-meta">敘述性統計、資料分組統計 (GroupBy) 與基本資料匯出</div>
+                    <div class="links-group">
+                        <a class="link-btn" href="./lecture/5_data_summary.html" target="_blank">🖥️ 線上投影片 (Reveal.js)</a>
+                        <a class="link-btn" href="code/5_data_summary.py" target="_blank">⬇️ 原始程式碼</a>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Your Name. All Rights Reserved. Powered by GitHub Pages.</p>
+    </footer>
+
+</body>
+</html>
