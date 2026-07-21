@@ -6,6 +6,5 @@ code/data/
 tmp.md
 *.csv
 *.xlsx
-/lecture
 code/test.py
 file.txt
