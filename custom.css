@@ -22,11 +22,14 @@
 
 /*程式碼設定*/
 .reveal pre code {
+  font-family: "Consolas", "Menlo", "Courier New", monospace !important;
   font-size: 1.2em !important;
 }
 
 .reveal :not(pre) > code {
+  font-family: "Consolas", "Menlo", "Courier New", monospace !important;
   font-size: 1.2em !important;
+
 }
 
 
@@ -60,7 +63,7 @@
 }
 
 /* 
-pandoc mdfiles/5_data_summary.md -t revealjs -o lecture/5_data_summary.html `
+pandoc mdfiles/4_data_clean.md -t revealjs -o lecture/4_data_clean.html `
   --embed-resources --standalone --slide-level=2 `
   -V revealjs-url=./reveal.js `
   --css=custom.css
